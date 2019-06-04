@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/images/favicon.ico?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false,"dimmer":true},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  <script>
+    var OriginTitle = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+            document.title = '╭(°A°`)╮ 页面崩溃啦 ~';
+            clearTimeout(titleTime);
+        }
+        else {
+            document.title = '(ฅ>ω<*ฅ) 噫又好了~' + OriginTitle;
+            titleTime = setTimeout(function () {
+                document.title = OriginTitle;
+            }, 2000);
+        }
+    });
+   </script>
+
+
+
+
+  
+
+
+
+
+  <meta name="description" content="Linux - Chapter - 1">
+<meta name="keywords" content="超越,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超物Linux-1">
+<meta property="og:url" content="https://eternaltimes.github.io/2019/05/18/超物Linux-1/index.html">
+<meta property="og:site_name" content="Eternal Times">
+<meta property="og:description" content="Linux - Chapter - 1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/EternalTimes/IMG/raw/master/超越/2019/Linux/Operating_system_architecture.svg.png">
+<meta property="og:updated_time" content="2019-05-20T08:56:22.821Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="超物Linux-1">
+<meta name="twitter:description" content="Linux - Chapter - 1">
+<meta name="twitter:image" content="https://github.com/EternalTimes/IMG/raw/master/超越/2019/Linux/Operating_system_architecture.svg.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://eternaltimes.github.io/2019/05/18/超物Linux-1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>超物Linux-1 | Eternal Times</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Eternal Times</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://eternaltimes.github.io/2019/05/18/超物Linux-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lao Lin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eternal Times">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">超物Linux-1
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-18 20:37:41" itemprop="dateCreated datePublished" datetime="2019-05-18T20:37:41+08:00">2019-05-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-20 16:56:22" itemprop="dateModified" datetime="2019-05-20T16:56:22+08:00">2019-05-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>Linux - Chapter - 1</strong><br><a id="more"></a></p>
+<h1 id="1-Linux-简介"><a href="#1-Linux-简介" class="headerlink" title="1 Linux 简介"></a>1 Linux 简介</h1><h2 id="1-1-Linux-的历史"><a href="#1-1-Linux-的历史" class="headerlink" title="1.1 Linux 的历史"></a>1.1 Linux 的历史</h2><h3 id="1-1-1-Linux-之前"><a href="#1-1-1-Linux-之前" class="headerlink" title="1.1.1 Linux 之前"></a>1.1.1 Linux 之前</h3><blockquote>
+<p>“C语言因Unix而生”</p>
+</blockquote>
+<ol>
+<li>1969年以前:一个伟大的梦想——Bell,MIT与GE的Multics系统</li>
+<li>1969年:Ken Thompson 的小型file server system</li>
+<li>1973年:<strong>Unix的正式诞生</strong>,Ritchie等人以  <strong>C 语言</strong> 写出第一个正式 Unix 核心</li>
+<li>1977年:重要的 Unix 分支——BSD 的诞生</li>
+<li>1979年:重要的 System V 架构与版权宣告</li>
+<li>1984年之一:x86 架构的 Minix 操作系统开始撰写并于两年后诞生</li>
+<li>1984年之二:GNU 计划与 FSF 基金会的成立</li>
+<li>1988年:图形接口 XFree86 计划</li>
+<li>1991年:芬兰大学生 Linus Torvalds (林纳斯·托瓦兹)的一则简讯——Linux诞生</li>
+</ol>
+<h3 id="1-1-2-Linux发展史"><a href="#1-1-2-Linux发展史" class="headerlink" title="1.1.2 Linux发展史"></a>1.1.2 Linux发展史</h3><blockquote>
+<p>Linux 操作系统的诞生、发展和成长过程始终依赖着五个重要支柱：UNIX 操作系统、MINIX 操作系统、GNU计划、POSIX 标准和Internet 网络。——来自<a href="https://baike.baidu.com/item/linux" target="_blank" rel="noopener">百度百科</a></p>
+</blockquote>
+<ul>
+<li>1981 年IBM公司推出微型计算机IBM PC。</li>
+<li>1991年，GNU计划已经开发出了许多工具软件，最受期盼的GNU C编译器已经出现，GNU的操作系统核心HURD一直处于实验阶段，没有任何可用性，实质上也没能开发出完整的GNU操作系统，但是GNU奠定了Linux用户基础和开发环境。</li>
+<li>1991年初，林纳斯·托瓦兹开始在一台386sx兼容微机上学习minix操作系统。1991年4月，林纳斯·托瓦兹开始酝酿并着手编制自己的操作系统。</li>
+<li>1991 年4 月13 日在comp.os.minix 上发布说自己已经成功地将bash 移植到了minix 上，而且已经爱不释手、不能离开这个shell软件了。</li>
+<li>1991年7月3日，第一个与Linux有关的消息是在comp.os.minix上发布的（当然此时还不存在Linux这个名称，当时林纳斯·托瓦兹的脑子里想的可能是FREAX，FREAX的英文含义是怪诞的、怪物、异想天开等）。</li>
+<li>1991年的10月5日，林纳斯·托瓦兹在comp.os.minix新闻组上发布消息，正式向外宣布Linux内核的诞生（Freeminix-like kernel sources for 386-AT）。</li>
+<li>1993年，大约有100余名程序员参与了Linux内核代码编写/修改工作，其中核心组由5人组成，此时Linux 0.99的代码大约有十万行，用户大约有10万左右。</li>
+<li>1994年3月，Linux1.0发布，代码量17万行，当时是按照<strong>完全自由免费</strong>的协议发布，随后正式采用GPL协议。</li>
+<li>1995年1月，Bob Young创办了RedHat（小红帽），以GNU/Linux为核心，集成了400多个源代码开放的程序模块，搞出了一种冠以品牌的Linux，即RedHat Linux,称为Linux”发行版”，在市场上出售。这在经营模式上是一种创举。</li>
+<li>1996年6月，Linux 2.0内核发布，此内核有大约40万行代码，并可以支持多个处理器。此时的Linux 已经进入了实用阶段，全球大约有350万人使用。</li>
+<li>1998年2月，以Eric Raymond为首的一批年轻的”老牛羚骨干分子”终于认识到GNU/Linux体系的产业化道路的本质，并非是什么自由哲学，而是市场竞争的驱动，创办了”Open Source Intiative”（开放源代码促进会）”复兴”的大旗，在互联网世界里展开了一场历史性的Linux产业化运动。</li>
+<li>2001年1月，Linux 2.4发布，它进一步地提升了SMP系统的扩展性，同时它也集成了很多用于支持桌面系统的特性：USB，PC卡（PCMCIA）的支持，内置的即插即用，等等功能。</li>
+<li>2003年12月，Linux 2.6版内核发布，相对于2.4版内核2.6在对系统的支持都有很大的变化。</li>
+<li>2004年的第1月，SuSE嫁到了Novell，SCO继续顶着骂名四处强行“化缘”， Asianux， MandrakeSoft也在五年中首次宣布季度赢利。3月，SGI宣布成功实现了Linux操作系统支持256个Itanium 2处理器。<br>——以上均选自<a href="https://baike.baidu.com/item/linux" target="_blank" rel="noopener">百度百科</a></li>
+<li>2011年07月22日，Linux Kernel 3.0 发布</li>
+<li>2015年04月12日，Linux Kernel 4.0 发布</li>
+<li>2019年03月03日，Linux Kernel 5.0 发布<br>——以上来自<a href="https://zh.wikipedia.org/wiki/Linux内核" target="_blank" rel="noopener">Wiki</a></li>
+</ul>
+<h3 id="1-1-3-Linux的基本思想"><a href="#1-1-3-Linux的基本思想" class="headerlink" title="1.1.3 Linux的基本思想"></a>1.1.3 Linux的基本思想</h3><p> Linux的基本思想有两点最主要的：第一，一切都是文件。是的没错，Linux把系统中所有东西都归结为文件，包括一些设备（软件或硬件）、命令、进程、甚至是操作系统。可以把他们理解为具有各自特性或类型的文件。<br> 第二，每个软件都有自己确定的用途。这也是实现前文所说的系统高效的重要条件。</p>
+<h3 id="1-1-4-Linux的内核（Kernel）"><a href="#1-1-4-Linux的内核（Kernel）" class="headerlink" title="1.1.4 Linux的内核（Kernel）"></a>1.1.4 Linux的内核（Kernel）</h3><p>作为初学者，首先我们应该理解一下内核是什么东东。在前面关于操作系统的解释中，我们已经略有涉及。</p>
+<blockquote>
+<p>内核是操作系统最基本的部分。它是为众多应用程序提供对计算机硬件的安全访问的一部分软件，这种访问是有限的，并且内核决定一个程序在什么时候对某部分硬件操作多长时间。内核的分类可分为单内核和双内核以及微内核。严格地说，内核并不是计算机系统中必要的组成部分。——<a href="https://baike.baidu.com/item/内核" target="_blank" rel="noopener">百度百科</a></p>
+</blockquote>
+<p>简单来说，内核就像是一个系统的处理大脑，是必不可少的。那么，<strong>Linux</strong>的内核又有什么与众不同的地方呢？</p>
+<blockquote>
+<p>Linux是一种开源电脑操作系统内核。它是一个用C语言写成，符合POSIX标准的类Unix操作系统。</p>
+</blockquote>
+<p>是的，Linux内核的一个最重要的特点就是由C语言编成并且开源辣！这使得Linux可以被各种国内外大神优化与改进，从而能在各种各样的设备上运行并且时常更新。这也是Linux生命力如此顽强的原因啦。</p>
+<h2 id="1-2-Linux-于-Windows-、-Mac-OS-X-的区别"><a href="#1-2-Linux-于-Windows-、-Mac-OS-X-的区别" class="headerlink" title="1.2 Linux 于 Windows 、 Mac OS X 的区别"></a>1.2 Linux 于 Windows 、 Mac OS X 的区别</h2><h3 id="1-2-1-什么是操作系统？"><a href="#1-2-1-什么是操作系统？" class="headerlink" title="1.2.1 什么是操作系统？"></a>1.2.1 什么是操作系统？</h3><blockquote>
+<p>操作系统理论在计算机科学中，為歷史悠久而又活跃的分支；而操作系统的设计与实现则是软件工业的基础与核心。——来自<a href="https://baike.baidu.com/item/linux" target="_blank" rel="noopener">Wiki</a></p>
+</blockquote>
+<blockquote>
+<p>没有软件的计算机只是一堆废铁</p>
+</blockquote>
+<p>操作系统（Operating System，OS），是管理计算机硬件和软件资源的计算机程序，同时也是计算机系统的核心和基石。操作系统需要处理如管理和配置内存、决定系统资源供应的优先次序、控制输入输出装置、操作网络及管理文件系统等基本事务。操作系统为用户提供与应用程序交互的方式，如<strong>图形用户界面（Grapical User Interface，GUI）</strong>、<strong>命令行（Command Line或者Shell）</strong>等。应用程序通过<strong>系统调用（System Call)</strong>（在Windows上叫Windows API）来通过操作系统内核访问硬件资源。一般而言，一个完整的计算机系统由<strong>内核（Kernel）</strong>和<strong>用户态应用程序(Usermode Application，APP)/库(Library，参见后文)</strong>组成。</p>
+<p><img src="https://github.com/EternalTimes/IMG/raw/master/超越/2019/Linux/Operating_system_architecture.svg.png" alt="操作系统"></p>
+<p> 简单来讲上面的图可以带给我们底下的概念：</p>
+<ul>
+<li><strong>操作系统的核心直接根据硬件写成，所以一个特定的操作系统核心不能在不同的硬件架构下运行。</strong>举例来讲，pc版的Win10不能在手机上运行。</li>
+<li><strong>操作系统只是管理整个硬件资源，包括cpu、内存等。</strong>如果没有其他应用程序，操作系统只能让计算机get ready而无法运作其他功能。</li>
+<li><strong>任何应用程序的开发都依赖于操作系统提供的借口。</strong>比如说，给windows开发的程序无法在linux上运行。</li>
+</ul>
+<blockquote>
+<p>为了与<strong>浏览器中的web应用程序</strong>区分，上述的用户态应用程序也被称为<strong>本地应用程序（Native Application）</strong>。</p>
+</blockquote>
+<p>操作系统的类型非常多样，不同类型的计算机安装的操作系统可从简单到复杂，从物联网的嵌入式设备到手机、PC再到超级计算机，操作系统存在着很大的差异。因而许多操作系统的开发者对于它涵盖的定义的认识也不大一致，例如有些操作系统整合了GUI，有些则将GUI看成非必要的应用程序。</p>
+<h3 id="1-2-2-三大系统"><a href="#1-2-2-三大系统" class="headerlink" title="1.2.2 三大系统"></a>1.2.2 三大系统</h3><ul>
+<li>Windows：由Microsoft开发，由于哲学理念（见前言）以及<strong>设计过于玄学</strong>以及正版太贵盗版横行以及在这个平台上开发跟<del>往屁股里塞榴莲</del>一样浑身难受（虽说Visual Studio被称为宇宙第一IDE），我不喜欢这玩意——虽然说这玩意在PC操作系统市场上占据的份额最多，一般人也大多用它（略略略）——话说回来，微软近年形象改变了许多，在开源上的投入也在不断加大，甚至打出了Microsoft Love Linux的旗号，Windows 10上也推出了<strong>Linux子系统（Windows Subsystem for Linux，WSL）</strong>（很多人说性能不好？），可以在Windows Store搜索Linux了解一下。</li>
+<li>MacOS（OSX）和IOS：由苹果公司开发，基于<strong>开源（开放源代码，Open Source，即代码可以被自由的获得）</strong>的Darwin。优化就不要说了，业界领先，就是设备<em>太贵</em>，买不起（略略略）——这个平台上开发算是比较舒服的，很多程序员也喜欢，毕竟是个类UNIX，逼格也高。（<strong>价格与逼格是主要矛盾</strong>）</li>
+<li>Linux:很多人对Linux的不良印象来自中科红旗的倒闭，但要问世界上哪个操作系统被最广泛的使用——不是Windwos，而是Linux。从物联网（Internet of Things，IOT）嵌入式设备到Android手机还有大部分的服务器和超级计算机——都基于Linux。可以说，<strong>Linux象征着未来</strong>。——说到底，中国人目前没有能力做自主操作系统——可别跟我说什么氢OS，MIUI，Android换了个皮而已。</li>
+</ul>
+<h2 id="1-3-主要的Linux"><a href="#1-3-主要的Linux" class="headerlink" title="1.3 主要的Linux"></a>1.3 主要的Linux</h2><p> 现在比较流行的Linux系统主要是Ubuntu，Debian，Chrome，Android，Raspberry(树莓派)，Deepin(中国开发的)</p>
+<h2 id="1-4-Windows-10-的-Linux-子系统"><a href="#1-4-Windows-10-的-Linux-子系统" class="headerlink" title="1.4 Windows 10 的 Linux 子系统"></a>1.4 Windows 10 的 Linux 子系统</h2><blockquote>
+<p><strong>适用于 Windows 的 Linux 子系统</strong>（英语：Windows Subsystem for Linux，简称WSL）是一个为在Windows 10和Windows Server 2019上能够原生运行Linux二进制可执行文件（ELF格式）的兼容层。<br>——来自<a href="https://zh.wikipedia.org/wiki/适用于_Linux_的_Windows_子系统" target="_blank" rel="noopener">Wiki</a></p>
+</blockquote>
+<h3 id="1-4-1-概览"><a href="#1-4-1-概览" class="headerlink" title="1.4.1 概览"></a>1.4.1 概览</h3><p>WSL提供了一个由微软开发的Linux兼容的内核接口（不包含Linux内核代码），然后可以在其上运行GNU用户空间，例如Ubuntu，openSUSE，SUSE Linux Enterprise Server，Debian和Kali Linux。这样的用户空间可能包含Bash shell和命令语言，使用本机GNU/Linux命令行工具（sed，awk等），编程语言解释器（Ruby，Python等），甚至是图形应用程序（使用主机端的X窗口系统）。</p>
+<h3 id="1-4-2-简介和可用性"><a href="#1-4-2-简介和可用性" class="headerlink" title="1.4.2 简介和可用性"></a>1.4.2 简介和可用性</h3><p>在周年更新中引入时，只有Ubuntu镜像可用。秋季创意者更新将Linux发行版的安装过程移至Microsoft商店，并引入了Fedora和SUSE镜像。</p>
+<p>WSL仅在版本1607之后的64位版本的Windows 10中可用。它也可在Windows Server 2019中使用。</p>
+<h3 id="1-4-3-发展"><a href="#1-4-3-发展" class="headerlink" title="1.4.3 发展"></a>1.4.3 发展</h3><p>微软首次尝试在Windows上实现类似Unix的兼容性，首先是微软POSIX子系统，由Windows Services for UNIX通过MKS/Interix取代，后者最终因Windows 8.1的发布而被弃用。Windows Subsystem for Linux背后的技术起源于未发布的Astoria项目，它使一些Android应用程序能够在Windows 10 移动版上运行。它首先在Windows 10 Insider Preview build 14316中提供。</p>
+<p>虽然微软以前的项目和第三方Cygwin专注于基于POSIX标准创建自己独特的类Unix环境，但WSL的目标是原生Linux兼容性。WSL不是将非原生功能包装到Win32系统调用中，而是利用NT内核执行程序将Linux程序作为特殊的、隔离的最小进程（称为“pico-processes”）作为专用系统连接到内核模式“pico-providers”。调用和异常处理程序不同于vanilla NT进程。</p>
+<p>微软将WSL视为“主要面向开发人员的工具 — 尤其是Web开发人员以及在开源项目上工作或使用开源项目的人员”。WSL使用的资源少于完全虚拟化的机器，这是在Windows环境中运行Linux软件的最直接方式，同时还允许用户在同一组文件上使用Windows应用程序和Linux工具。</p>
+<h3 id="1-4-4-体系结构"><a href="#1-4-4-体系结构" class="headerlink" title="1.4.4 体系结构"></a>1.4.4 体系结构</h3><p><strong>LXSS Manager Service</strong>是负责与子系统交互的服务（通过驱动程序lxss.sys和lxcore.sys），以及Bash.exe（不要与Linux发行版提供的Shell混淆）的方式启动Linux进程，以及在执行期间处理Linux系统调用和二进制锁。</p>
+<p>特定用户调用的所有Linux进程都进入“Linux实例”（通常，第一个调用的进程是init）。关闭所有应用程序后，将关闭实例。</p>
+<p><strong>硬件和文件系统访问</strong><br>由于没有硬件仿真/虚拟化（与coLinux等其他项目不同），WSL直接使用主机文件系统（通过VolFS和DrvFS）和硬件的某些部分，例如网络（Web服务器，用于例如，可以通过主机上配置的相同接口和IP地址进行访问，并且对使用需要管理权限的端口或已经被其他应用程序占用的端口共享相同的限制），这保证了互操作性。</p>
+<p>即使从shell运行sudo，某些位置（例如系统文件夹）和配置的访问/修改也受到限制。必须启动具有提升权限的实例才能获得“真正的sudo”并允许此类访问。</p>
+<p><strong>局限性</strong><br>此子系统无法运行所有Linux软件（如32位二进制文件）或需要在WSL中未实现的特定Linux内核服务的软件。由于WSL中没有“真正的”Linux内核，因此无法运行内核模块（如设备驱动程序）。</p>
+<p>可以通过在Windows（主机）环境（例如VcXsrv或Xming）中安装X窗口系统来运行一些图形（GUI）应用程序（例如Mozilla Firefox），尽管并非没有警告，例如缺乏音频支持或硬件加速（导致图形性能不佳）。当前还没有实施对OpenCL和CUDA的支持，尽管计划在将来的版本中使用。</p>
+<p>也就是说，微软明确指出WSL面向应用程序的开发者，而不是面向桌面环境或生产服务器，建议使用虚拟机（Hyper-V或Kubernetes）和Azure来实现这些目的。</p>
+<hr>
+<h1 id="About"><a href="#About" class="headerlink" title="About"></a>About</h1><p>原编者：<strong>三硝基甲苯</strong>; 2018版：<strong>刘梓熙</strong>学长<br>2019版：<a href="https://eternaltimes.github.io">EternalTimes</a><br>原作者个人主页<a href="https://github.com/chfanghr" target="_blank" rel="noopener">Github</a> ; <a href="https://gitee.com/Fanghr" target="_blank" rel="noopener">码云</a></p>
+<hr>
+<p>2019.5.20 14:07:54</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/超越/" rel="tag"># 超越</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/16/超物Linux/" rel="next" title="超物Linux">
+                <i class="fa fa-chevron-left"></i> 超物Linux
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/18/超物Linux-2/" rel="prev" title="超物Linux-2">
+                超物Linux-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Lao Lin</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Linux-简介"><span class="nav-number">1.</span> <span class="nav-text">1 Linux 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Linux-的历史"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 Linux 的历史</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-Linux-之前"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1 Linux 之前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-Linux发展史"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.1.2 Linux发展史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-Linux的基本思想"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.1.3 Linux的基本思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-4-Linux的内核（Kernel）"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.1.4 Linux的内核（Kernel）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Linux-于-Windows-、-Mac-OS-X-的区别"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Linux 于 Windows 、 Mac OS X 的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-什么是操作系统？"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 什么是操作系统？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-三大系统"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 三大系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-主要的Linux"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 主要的Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Windows-10-的-Linux-子系统"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 Windows 10 的 Linux 子系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-概览"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1 概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-简介和可用性"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.4.2 简介和可用性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-发展"><span class="nav-number">1.4.3.</span> <span class="nav-text">1.4.3 发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-4-体系结构"><span class="nav-number">1.4.4.</span> <span class="nav-text">1.4.4 体系结构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#About"><span class="nav-number">2.</span> <span class="nav-text">About</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+    <div id="sidebar-dimmer"></div>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lao Lin</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '22772f2b4a768f474172',
+    clientSecret: 'ed8cf74d18d2d50a38a3475dcebebc8cd5c276c8',
+    repo: 'eternaltimes.github.io',
+    owner: 'EternalTimes',
+    admin: ['EternalTimes'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

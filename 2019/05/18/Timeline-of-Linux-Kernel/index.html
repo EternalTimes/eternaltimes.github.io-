@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/images/favicon.ico?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false,"dimmer":true},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  <script>
+    var OriginTitle = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+            document.title = '╭(°A°`)╮ 页面崩溃啦 ~';
+            clearTimeout(titleTime);
+        }
+        else {
+            document.title = '(ฅ>ω<*ฅ) 噫又好了~' + OriginTitle;
+            titleTime = setTimeout(function () {
+                document.title = OriginTitle;
+            }, 2000);
+        }
+    });
+   </script>
+
+
+
+
+  
+
+
+
+
+  <meta name="description" content="Linux内核时间轴">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Timeline of Linux Kernel">
+<meta property="og:url" content="https://eternaltimes.github.io/2019/05/18/Timeline-of-Linux-Kernel/index.html">
+<meta property="og:site_name" content="Eternal Times">
+<meta property="og:description" content="Linux内核时间轴">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-03T06:08:00.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Timeline of Linux Kernel">
+<meta name="twitter:description" content="Linux内核时间轴">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://eternaltimes.github.io/2019/05/18/Timeline-of-Linux-Kernel/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Timeline of Linux Kernel | Eternal Times</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Eternal Times</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://eternaltimes.github.io/2019/05/18/Timeline-of-Linux-Kernel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lao Lin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eternal Times">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Timeline of Linux Kernel
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-18 20:40:00" itemprop="dateCreated datePublished" datetime="2019-05-18T20:40:00+08:00">2019-05-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-03 14:08:00" itemprop="dateModified" datetime="2019-06-03T14:08:00+08:00">2019-06-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>Linux内核时间轴</strong><br><a id="more"></a></p>
+<p>2.6.0之前的版本系列</p>
+<table class="wikitable mw-collapsible mw-collapsed"><br><table>        <tr>            <th>内核            </th>            <th>初始发行日期            </th>            <th>最新版本            </th>            <th>维护者            </th>            <th>支持状态            </th>            <th>备注            </th>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="0.01"><span style="display: none;">旧版本，不再支持：</span> 0.01            </td>            <td>1991年09月17日            </td>            <td>0.03            </td>            <td rowspan="8"><span class="nowrap">林纳斯·托瓦兹</span>            </td>            <td>EOL            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="0.10"><span style="display: none;">旧版本，不再支持：</span> 0.10            </td>            <td>1991年11月            </td>            <td>0.12            </td>            <td>EOL            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="0.95"><span style="display: none;">旧版本，不再支持：</span> 0.95            </td>            <td>1992年03月08日            </td>            <td>0.99.15            </td>            <td>EOL            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="1.0"><span style="display: none;">旧版本，不再支持：</span> 1.0            </td>            <td>1994年03月14日            </td>            <td>1.0.9            </td>            <td>EOL            </td>            <td>有176,250字符串。此版本的Linux内核只支持单处理器基于i386的计算机系统，可移植性成为一个问题。随后1.2版（310,950字符串）支持多种计算机架构例如Alpha、SPARC、MIPS处理器。            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="1.1"><span style="display: none;">旧版本，不再支持：</span> 1.1            </td>            <td>1994年04月06日            </td>            <td>1.1.95            </td>            <td>EOL            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="1.2"><span style="display: none;">旧版本，不再支持：</span> 1.2            </td>            <td>1995年03月07日            </td>            <td>1.2.13            </td>            <td>EOL            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="1.3"><span style="display: none;">旧版本，不再支持：</span> 1.3            </td>            <td>1995年06月12日            </td>            <td>1.3.100            </td>            <td>EOL            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="pre2.0"><span style="display: none;">旧版本，不再支持：</span> pre2.0            </td>            <td>1996年05月12日            </td>            <td>pre2.0.14            </td>            <td>EOL            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="2.0"><span style="display: none;">旧版本，不再支持：</span> 2.0            </td>            <td>1996年06月09日            </td>            <td>2.0.40            </td>            <td>David Weinehall            </td>            <td><b>EOL</b>（已不再支持）            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="2.2"><span style="display: none;">旧版本，不再支持：</span> 2.2            </td>            <td>1999年01月26日            </td>            <td>2.2.27-rc2            </td>            <td>Marc-Christian Petersen（前维护者                    艾伦·考克斯）            </td>            <td><b>EOL</b>（已不再支持）            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="2.4"><span style="display: none;">旧版本，不再支持：</span> 2.4            </td>            <td>2001年01月04日            </td>            <td>2.4.37.11            </td>            <td>Willy Tarreau（前维护者Marcelo Tosatti）            </td>            <td><b>EOL</b>（已不再支持）            </td>            <td>            </td>        </tr>        <tr>            <td colspan="6"><small>                    <div class="templateVersion l" style="margin-left: -1em;">                        <div style="float: left; margin-left: 1em;"><span style="white-space: nowrap;"><b>格式：</b></span>                        </div>                        <div style="float: left; margin-left: 1em;"><span style="border-left: 1.2em solid #FDB3AB; padding-left: 0.3em; white-space: nowrap;" title="旧版本，不再支持">旧版本</span></div>                        <div style="float: left; margin-left: 1em;"><span style="border-left: 1.2em solid #FEF8C6; padding-left: 0.3em; white-space: nowrap;" title="旧版本，仍被支持">旧版本，仍被支持</span></div>                        <div style="float: left; margin-left: 1em;"><span style="border-left: 1.2em solid #D4F4B4; padding-left: 0.3em; white-space: nowrap;" title="当前版本"><b>当前版本</b></span></div>                        <div style="float: left; margin-left: 1em;"><span style="border-left: 1.2em solid #FED1A0; padding-left: 0.3em; white-space: nowrap;" title="最新的预览版">最新的预览版</span></div>                        <div style="float: left; margin-left: 1em; display: none;"><span style="border-left: 1.2em solid #C1E6F5; padding-left: 0.3em; white-space: nowrap;" title="未来版本">未来版本</span></div>                        <div style="clear: left;"></div>                    </div>                </small>            </td>        </tr>    </table></table>
+
+<p>2.6.x.y版本系列（主要版本）</p>
+<table class="wikitable mw-collapsible mw-collapsed">    <table>        <tr>            <th>内核            </th>            <th>初始发行日期            </th>            <th>最新版本            </th>            <th>维护者            </th>            <th>支持状态            </th>            <th>备注            </th>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="2.6.16"><span style="display: none;">旧版本，不再支持：</span> 2.6.16            </td>            <td>2006年03月20日            </td>            <td>2.6.16.62            </td>            <td>Adrian Bunk（前维护者葛雷格·克罗哈曼）            </td>            <td><b>EOL</b>（已不再支持）            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="2.6.27"><span style="display: none;">旧版本，不再支持：</span> 2.6.27            </td>            <td>2008年10月09日            </td>            <td>2.6.27.62            </td>            <td>葛雷格·克罗哈曼            </td>            <td><b>EOL</b>（已不再支持）            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="2.6.32"><span style="display: none;">旧版本，不再支持：</span> 2.6.32            </td>            <td>2009年12月03日            </td>            <td>2.6.32.71            </td>            <td>Willy Tarreau（前维护者葛雷格·克罗哈曼）            </td>            <td><b>EOL</b>，长期支持版本，由2009年12月3日至2016年3月            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="2.6.34"><span style="display: none;">旧版本，不再支持：</span> 2.6.34            </td>            <td>2010年05月16日            </td>            <td>2.6.34.15            </td>            <td> hPaul Gortmaker（前维护者Andi Kleen）            </td>            <td><b>EOL</b>，长期支持版本，从2010年6月至2014年2月            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="2.6.39"><span style="display: none;">旧版本，不再支持：</span> 2.6.39            </td>            <td>2011年05月19日            </td>            <td>2.6.39.4            </td>            <td><span class="nowrap">林纳斯·托瓦兹</span>            </td>            <td><b>EOL</b>，2.6内核系列最后稳定版。            </td>            <td>            </td>        </tr>    </table></table>
+
+
+<p>3.x.y版本系列</p>
+<table class="wikitable mw-collapsible mw-collapsed">    <table>        <tr>            <th>内核            </th>            <th>初始发行日期            </th>            <th>最新版本            </th>            <th>维护者            </th>            <th>支持状态            </th>            <th>备注            </th>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.0"><span style="display: none;">旧版本，不再支持：</span> 3.0            </td>            <td>2011年07月22日            </td>            <td>3.0.101            </td>            <td><span class="nowrap">葛雷格·克罗哈曼</span>            </td>            <td><b>EOL</b>，长期支持版本，从2011年7月至2013年10月            </td>            <td>托瓦兹宣布，大的变化是，“没有，绝对没有。”2011年5月30日，托瓦兹宣布，“让我们确保我们真正的下一个版本不只是一个全新的闪亮的数字，而是有一个好的内核。”3.0的发布日接近Linux的20周年纪念日。            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.2"><span style="display: none;">旧版本，不再支持：</span> 3.2            </td>            <td>2012年01月05日            </td>            <td>3.2.99            </td>            <td>Ben Hutchings            </td>            <td><b>EOL</b>，长期支持版本，从2011年12月至2018年5月            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.4"><span style="display: none;">旧版本，不再支持：</span> 3.4            </td>            <td>2012年05月21日            </td>            <td>3.4.113            </td>            <td>Li Zefan（前维护者葛雷格·克罗哈曼）            </td>            <td><b>EOL</b>，长期支持版本，从2012年5月至2017年4月            </td>            <td>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.5"><span style="display: none;">旧版本，不再支持：</span> 3.5            </td>            <td>2012年07月21日            </td>            <td>3.5.7            </td>            <td>葛雷格·克罗哈曼            </td>            <td><b>EOL</b>            </td>            <td>                <ul>                    <li>CoDel队列管理算法</li>                    <li>seccomp filters</li>                    <li>沙盒机制</li>                    <li>Android风格的自动休眠和唤醒锁机制</li>                    <li>用户空间探测子系统uprobes</li>                    <li>TCP连接修复</li>                    <li>减少重复确认加快转发的TCP Early Retransmit</li>                    <li>连续性内存分配器</li>                    <li>kcmp ()系统调用</li>                    <li>ext4文件系统加入元数据校验和</li>                    <li>改进Btrfs</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.6"><span style="display: none;">旧版本，不再支持：</span> 3.6            </td>            <td>2012年10月01日            </td>            <td>3.6.11            </td>            <td>葛雷格·克罗哈曼            </td>            <td><b>EOL</b>            </td>            <td>客户端TCP Fast Open实现            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.7"><span style="display: none;">旧版本，不再支持：</span> 3.7            </td>            <td>2012年12月11日            </td>            <td>3.7.10            </td>            <td>葛雷格·克罗哈曼            </td>            <td><b>EOL</b>            </td>            <td>                <ul>                    <li>改进开源显卡驱动程序，包括： Nvidia、Intel 与 Radeon</li>                    <li>通过Xen hypervisor实现对ARM Cortex-A15的硬件虚拟化支持</li>                    <li>继续改进BTRFS文件系统</li>                    <li>TCP Fast open</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.8"><span style="display: none;">旧版本，不再支持：</span> 3.8            </td>            <td>2013年02月19日            </td>            <td>3.8.13            </td>            <td>葛雷格·克罗哈曼            </td>            <td><b>EOL</b>            </td>            <td>                <ul>                    <li>CPU热插拔支持；</li>                    <li>改进ACPI电源管理；</li>                    <li>改善XFS文件系统；</li>                    <li>支持64位ARMv8/AArch64；</li>                    <li>放弃支持旧的i386处理器，减少内核复杂度；</li>                    <li>Video 4 Linux 2驱动支持DMA-BUF；</li>                    <li>在某些工作负荷下减少物理内存占用；</li>                    <li>支持微软Windows 8多重触摸协议；</li>                    <li>音频驱动改进；</li>                    <li>加密性能改进；</li>                    <li>支持下一代IBM POWER8处理器（2013年发布）</li>                    <li>XFS文件系统的元数据完整性检查</li>                    <li>提升了NUMA调度</li>                    <li>内核内存使用审计和关联使用率限制</li>                    <li>EXT4文件系统的inline data support</li>                    <li>近乎完全支持user namespace等待</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.9"><span style="display: none;">旧版本，不再支持：</span> 3.9            </td>            <td>2013年04月29日            </td>            <td>3.9.11            </td>            <td>葛雷格·克罗哈曼            </td>            <td><b>EOL</b>            </td>            <td>                <ul>                    <li>继续完善F2FS文件系统</li>                    <li>省电功能改进</li>                    <li>改善ARM处理器支持</li>                    <li>音效、音频重大更新</li>                    <li>Google Goldfish Android模拟器源代码</li>                    <li>DRM显卡驱动改善</li>                    <li>硬件支持改善</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.10"><span style="display: none;">旧版本，不再支持：</span> 3.10            </td>            <td>2013年06月30日            </td>            <td>3.10.108            </td>            <td>Willy Tarreau            </td>            <td><b>EOL</b>，长期支持版本，从2013年6月至2017年10月            </td>            <td>                <ul>                    <li>完整支持DynTicks（动态定时器），并成为内核级别的内核特性。</li>                    <li>KVM虚拟化改进。</li>                    <li>音频/声音驱动更新。</li>                    <li>ARM架构支持改进，包括更好地支持64位架构。</li>                    <li>大量的Linux加密子系统优化。</li>                    <li>AMD电源管理改进。</li>                    <li>分阶段驱动（Staging Drivers）改进与新举措。</li>                    <li>BCache固态硬盘/机械硬盘缓存框架已经可用，使用两种硬盘的系统将会大大提速。</li>                    <li>eCryptfs AES-NI性能改进，支持AES指令集的AMD/Intel x86处理器将会大大提速。</li>                    <li>Btrfs文件系统支持skinny extent，quota也进行了一些重建。</li>                    <li>F2FS闪存文件系统重大改进。</li>                    <li>XFS额外保护。</li>                    <li>DRM驱动多方面改进。</li>                    <li>Radeon DRM驱动支持golden registers、UVD视频解码、RadeonSI tiling。</li>                    <li>引入QXL KMS驱动。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.11"><span style="display: none;">旧版本，不再支持：</span> 3.11            </td>            <td>2013年09月02日            </td>            <td>3.11.10            </td>            <td>葛雷格·克罗哈曼            </td>            <td><b>EOL</b>            </td>            <td>                <ul>                    <li>支持LZ4压缩，LZ4压缩和解压缩速度快于LZO、Snappy和zlib，当前只支持ARM架构，在ARMv7 1.5GHz硬件上它的压缩速度能达到45.6MB/s，相比之下LZO是25.2                        MB/s</li>                    <li>轻量级压缩交换缓存Zswap</li>                    <li>例行的Btrfs和XFS文件系统bug修正和性能改进，F2FS修正了Linux 3.10中发现的一个性能退化bug，首次加入高性能并行分布式文件系统Lustre</li>                    <li>动态电源管理支持从Radeon HD 2000到Radeon HD 7000系列的GPU</li><em>KVM和Xen虚拟化支持64位硬件（AArch64）                </em></ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.12"><span style="display: none;">旧版本，不再支持：</span> 3.12            </td>            <td>2013年11月03日            </td>            <td>3.12.74            </td>            <td>Jiri Slaby（前维护者葛雷格·克罗哈曼）            </td>            <td><b>EOL</b>，长期支持版本，从2013年11月至2017年5月            </td>            <td>                <ul>                    <li>优化了CPU频率管理器，更有效的实现动态调频功能，间接提升了部分开源和闭源驱动的性能。</li>                    <li>进一步改善了Radeon开源驱动的动态电源管理。</li>                    <li>增加了逆向工程出来的Snapdragon/Adreno显卡驱动。</li>                    <li>支持AMD首个异构计算的Berlin系列服务器APU。</li>小幅改善了F2FS、XFS和Btrfs文件系统。<li>                        ext4文件系统加入两个新功能：支持主动extent缓存，减少主读工作负荷的存储器使用，改进异步I/O。</li>*改进英特尔Haswell图形性能。                    <li>支持NVIDIA Optimus显示技术的动态GPU电源管理，双显卡笔记本可以动态的关闭或激活第二个GPU。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.13"><span style="display: none;">旧版本，不再支持：</span> 3.13            </td>            <td>2014年01月20日            </td>            <td>3.13.11            </td>            <td>葛雷格·克罗哈曼            </td>            <td><b>EOL</b>            </td>            <td>                <ul>                    <li>多队列块层允许I/O负载在多CPU内核中均衡，延展性更好，减少磁盘延迟，提供更好的磁盘性能。                    </li>                    <li>支持英特尔Broadwell和AMD Radeon R9 waii的新驱动。</li>                    <li>防火墙子系统/包过滤引擎nftables取代iptables。</li>                    <li>提供了一个更简单的内核ABI，减少重复代码，更有效的支持过滤规则。</li>                    <li>开源NVIDIA驱动加入新的电源管理代码。</li>                    <li>改进AMD HDMI音频功能。</li>                    <li>英特尔硬件支持立体/3D HDMI设备。</li>                    <li>Btrfs和F2FS文件系统改进。</li>                    <li>Linux功率限制框架和即时平均功率限制驱动程序将允许在超出定义临界值时限制某些组件的功耗。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.14"><span style="display: none;">旧版本，不再支持：</span> 3.14            </td>            <td>2014年03月31日            </td>            <td>3.14.79            </td>            <td>葛雷格·克罗哈曼            </td>            <td><b>EOL</b>，长期支持版本，从2014年3月至2016年8月            </td>            <td>                <ul>                    <li>开源NVIDIA驱动支持更多NVIDIA显卡。</li>                    <li>英特尔Broadwell的显示芯片及音频系统获得更好的支持。</li>                    <li>VMwareSVGA2显示驱动程序重大变更。</li>                    <li>NVIDIA Tegra初步支持PRIME。                    </li>                    <li>开源AMD驱动部分设备支持改进。</li>                    <li>经由新的驱动程序支持AMD加密协作处理器。</li>                    <li>通用CPU加速。</li>                    <li>F2FS及BTRFS文件系统改进。</li>                    <li>新增Xen的PVH支持。</li>                    <li>加入Deadline调度器。</li>                    <li>支持MIPS最新的CPU内核支持。</li>                    <li>加入TCP自动抑制功能。</li>                </ul>            </td><br>        </tr><br>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.15"><span style="display: none;">旧版本，不再支持：</span> 3.15            </td>            <td>2014年06月08日            </td>            <td>3.15.10            </td>            <td>葛雷格·克罗哈曼            </td>            <td><b>EOL</b>            </td>            <td>                <ul>                    <li>支持EFI混合模式，可以在32位的UEFI上运行64位的内核。</li>                    <li>激活异步线程来加快暂停及恢复的时间。</li>                    <li>开源驱动对新一代的NVIDIA Maxwell显卡的初步支持，以及对近期的AMD显卡的VEC 2.0视频解码支持。</li>                    <li>CPU前端的AVX-512及RDSEED扩展支持。</li>                    <li>支持Sony DualShock 4控制器。</li>                    <li>LLVM近乎完全支持编译主线内核。</li>                </ul>            </td>        </tr>        <tr>            <td class="templateVersion co" style="background-color: #FEF8C6;" title="旧版本，仍被支持" data-sort-value="3.16">                <span style="display: none;"> 旧版本，仍被支持：</span> 3.16            </td>            <td>2014年08月03日            </td>            <td>3.16.54            </td>            <td>Ben Hutchings            </td>            <td>长期支持版本，从2014年8月至2020年4月            </td>            <td>                <ul>                    <li>部分支持64位ARM架构的EFI。</li>                    <li>Samsung的Exynos多平台内核支持。</li>                    <li>改进ARM的Xen虚拟化支持。</li>                    <li>支持Dell Latitude掉落感应器。</li>                    <li>新的Synaptics触控版驱动程序。</li>                    <li>改进对Sony DualShock 4的支持。</li>                    <li>大量声卡驱动程序更新。</li>                    <li>Btrfs及XFS文件系统的重大更新。                    </li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.17"><span style="display: none;">旧版本，不再支持：</span> 3.17            </td>            <td>2014年10月05日            </td>            <td>3.17.8            </td>            <td>葛雷格·克罗哈曼            </td>            <td><b>EOL</b>            </td>            <td>                <ul>                    <li>开源AMD驱动改进。</li>                    <li>英特尔显示芯片驱动程序改进。</li>                    <li>Nvidia显卡驱动程序重大改进。</li>                    <li>新的DRM驱动程序。</li>                    <li>移除许多旧的或不再维护的驱动程序。</li>                    <li>增加了英特尔Braswell音效驱动程序。</li>                    <li>对Wacom绘图板更好的支持。</li>                    <li>新增许多ARM硬件支持。</li>                    <li>支持东芝笔记本电脑掉落感应器。</li>                    <li>x86上的KVM改进。</li>                    <li>F2FS改进。</li>                    <li>XFS有了sysfs接口。</li>                </ul>            </td>        </tr>        <tr>            <td class="templateVersion co" style="background-color: #FEF8C6;" title="旧版本，仍被支持" data-sort-value="3.18">                <span style="display: none;"> 旧版本，仍被支持：</span> 3.18            </td>            <td>2014年12月07日            </td>            <td>3.18.95            </td>            <td>Sasha Levin            </td>            <td><b>EOL</b>，长期支持版本，从2014年12月至2017年1月            </td>            <td>                <ul>                    <li>Nouveau支持从DisplayPort输出音频。</li>                    <li>许多新的多媒体驱动程序。</li>                    <li>Wacom绘图板支持改进。</li>                    <li>在64位ARM架构上的PCI支持。</li>                    <li>在大型服务器上更快的暂停及恢复速度。</li>                    <li>邮件信箱框架进入主线代码。</li>                    <li>ACPI及电源管理改进。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="3.19"><span style="display: none;">旧版本，不再支持：</span> 3.19            </td>            <td>2015年02月09日            </td>            <td>3.19.8            </td>            <td>葛雷格·克罗哈曼            </td>            <td><b>EOL</b>            </td>            <td>                <ul>                    <li>对Intel下一代的Skylake架构的显示芯片的初步激活。</li>                    <li>对Nvidia GeForce                            900系列的基本支持。</li>                    <li>在Btrfs文件系统上对于RAID                        5及RAID 6的改进。</li>                    <li>对多点触控的支持改进。</li>                </ul>            </td>        </tr>    </table></table>
+
+
+
+<p>4.x.y版本系列</p>
+<table class="wikitable mw-collapsible mw-collapsed">    <table>        <tr>            <th>内核            </th>            <th>初始发行日期            </th>            <th>最新版本            </th>            <th>维护者            </th>            <th>支持状态            </th>            <th>备注            </th>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.0"><span style="display: none;">旧版本，不再支持：</span> 4.0            </td>            <td>2015年04月12日            </td>            <td>4.0.9            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>Skylake架构处理更好的支持。</li>                    <li>支持Intel的Quark单片机。</li>                    <li>改进对PS3的支持。</li>                    <li>对Btrfs、F2FS、pNFS等多个文件系统支持改进。</li>                    <li>AMD Radeon驱动程序开始支持DisplayPort音源。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.1"><span style="display: none;">旧版本，不再支持：</span> 4.1            </td>            <td>2015年06月22日            </td>            <td>4.1.52            </td>            <td>Sasha Levin<br><span class="nowrap">(曾经是葛雷格·克罗哈曼)</span>            </td>            <td>EOL            </td>            <td>                <ul>                    <li>ext4支持文件系统层级的加密。</li>                    <li>F2FS、XFS、Btrfs文件系统增强与更新。</li>                    <li>RAID 5/6改进。</li>                    <li>Dell与Toshiba笔记本电脑支持改进。</li>                    <li>音频功能模块化。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.2"><span style="display: none;">旧版本，不再支持：</span> 4.2            </td>            <td>2015年08月30日            </td>            <td>4.2.8            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>大量的ARM架构改进。</li>                    <li>NCQ Trim支持。</li>                    <li>F2FS每一文件加密支持。</li>                    <li>输入设备支持改进。</li>                    <li>UEFI ESRT支持以让UEFI固件可在系统内更新。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.3"><span style="display: none;">旧版本，不再支持：</span> 4.3            </td>            <td>2015年11月02日            </td>            <td>4.3.6            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>默认激活Intel Skylake的显示芯片支持。</li>                    <li>许多文件系统方面的修正。</li>                </ul>            </td>        </tr>        <tr>            <td class="templateVersion co" style="background-color: #FEF8C6;" title="旧版本，仍被支持" data-sort-value="4.4">                <span style="display: none;"> 旧版本，仍被支持：</span> 4.4            </td>            <td>2016年1月10日            </td>            <td>4.4.169            </td>            <td>葛雷格·克罗哈曼            </td>            <td>长期支持版本，从2016年1月至2022年2月            </td>            <td>                <ul>                    <li>新增许多AMD硬件支持。</li>                    <li>UEFI 2.5改进。</li>                    <li>Toshiba笔记本电脑更多的改进支持。</li>                    <li>重要的ext4加密修复。</li>                    <li>用于设置内核编译参数的图形化接口之一，Xconfig移植到Qt5。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.5"><span style="display: none;">旧版本，不再支持：</span> 4.5            </td>            <td>2016年3月14日            </td>            <td>4.5.7            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>对Kabylake处理器内置显示芯片的初步支持。</li>                    <li>AMD显卡诸多改进。</li>                    <li>对于ARMv6与ARMv7的代码重写。</li>                    <li>Xbox One控制器支持改进。</li>                    <li>F2FS文件系统增加了新功能。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.6"><span style="display: none;">旧版本，不再支持：</span> 4.6            </td>            <td>2016年5月15日            </td>            <td>4.6.7            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>对树莓派的3D图形性能改进。</li>                    <li>新增对许多ARM平台的支持。</li>                    <li>新增对OrangeFS的支持。</li>                    <li>对XFS、ext4、Btrfs的诸多改进。                    </li>                    <li>EFI安全性改进。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.7"><span style="display: none;">旧版本，不再支持：</span> 4.7            </td>            <td>2016年07月24日            </td>            <td>4.7.10            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>支持AMD RX480。</li>                    <li>全新的安全模块LoadPin。</li>                    <li>支持制作USB/IP协议的虚拟USB设备控制器。</li>                    <li>支持在UEFI固件。</li>                    <li>新增schedutil频率控制器，CPUFreq动态频率缩放子系统速度更快、更精准。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.8"><span style="display: none;">旧版本，不再支持：</span> 4.8            </td>            <td>2016年10月02日            </td>            <td>4.8.17            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>tmpfs文件系统支持透明大暂存页。</li>                    <li>新的Formatted Kernel Documentation。</li>                    <li>解决延迟问题的Timer Wheel。</li>                    <li>改进高性能网络路由。                    </li>                    <li>创建内核时允许使用GCC plugins。</li>                    <li>加强用户复制。                    </li>                    <li>AMD GPU驱动支持超频，改进PowerPlay。</li>                    <li>初步支持NVIDIA Pascal显卡。</li>                    <li>支持Raspberry Pi                        3的BCM2837 SoC。</li>                    <li>支持ACPI Low-Power Idle。</li>                    <li>支持Microsoft Surface 3触屏。</li>                </ul>            </td>        </tr>        <tr>            <td class="templateVersion co" style="background-color: #FEF8C6;" title="旧版本，仍被支持" data-sort-value="4.9">                <span style="display: none;"> 旧版本，仍被支持：</span> 4.9            </td>            <td>2016年12月11日            </td>            <td>4.9.148            </td>            <td>葛雷格·克罗哈曼            </td>            <td>长期支持版本，从2016年12月至2019年1月            </td>            <td>                <ul>                    <li>2/3 代码翻新。</li>                    <li>新增 Greybus 硬件协议。</li>                    <li>新增 Vmapped kernel stacks 机制。</li>                    <li>支持 Memory Protection Key 机制。</li>                    <li>新增 XFS 共享式数据延伸功能。</li>                    <li>为 AMDGPU 提供虚拟屏幕支持，更好的 AMDGPU GPU 重置支持，并对这个现代 AMD GCN 驱动程序进行了其他变化。</li>                    <li>AMDGPU 还有试验性的 Southern Islands 支持 (GCN 1.0)，作为 Radeon DRM 中现有支持之外的一种选择。</li>                    <li>对英特尔 DRM 作了各种修补和改进，最显著的变化之一就是 DMA-BUF 隐式围栏 (implicit fencing)。</li>                    <li>3D渲染期间，为 Raspberry Pi VC4 驱动程序减少 GPU 和存储器方面的使用。</li>                    <li>CPUFreq 驱动程序继续更充分地使用调度程序的信息。</li>                    <li>内存保护密钥 (MPK) 支持。</li>                    <li>NVDIMM 支持方面的更新。</li>                    <li>F2FS 性能方面的改进。</li>                    <li>支持 OverlayFS SELinux。</li>                    <li>支持另外 29 种 ARM 机器，包括 Raspberry Pi Zero、LG Nexus 5 及其他知名的移动/嵌入式硬件。</li>                    <li>支持 Mellanox 平台。</li>                    <li>内核线程 (Kthread) 方面的改进。</li>                    <li>开始支持 BBR congestion control。</li>                    <li>System calls for memory protection keys。</li>                    <li>2017/01/19 确认为长期支持版本。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.10"><span style="display: none;">旧版本，不再支持：</span> 4.10            </td>            <td>2017年2月19日            </td>            <td>4.10.17            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>支持虚拟GPU。</li>                    <li>支持 CPU L2/L3 Cache。</li>                    <li>优化对 EXT4、F2FS、XFS、OverlayFS、NFS、CIFS、UBIFS、BEFS 和LOGFS 文件系统的支持。</li>                    <li>针对 AMD Radeon GPU 驱动进行强化。                    </li>                    <li>全新的“perfc2c”工具。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.11"><span style="display: none;">旧版本，不再支持：</span> 4.11            </td>            <td>2017年5月1日            </td>            <td>4.11.12            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>AMD GPU 电源管理更加成熟。</li>                    <li>已经可以处理 DisplayPort MST 音频。</li>                    <li>初步支持 Gemini Lake。</li>                    <li>SSD 支持可扩展 swapping。</li>                    <li>支持 SMC-R 协议(RFC7609)。</li>                    <li>增强并改进 Intel Turbo Boost Max 3.0。</li>                    <li>多队列块层支持可插拔 IO 调度器框架和死线调度器。</li>                    <li>新的 perf ftrace 命令。</li>                    <li>支持 Opal Storage Specification 驱动。</li>                    <li>新的Raspberry Pi 驱动。</li>                    <li>MD/RAID5 日志。</li>                    <li>新的 statx() 系统调用。</li>                    <li>SipHash 哈希函数，新的LZ4压缩实现。</li>                    <li>大量的安全、架构和驱动更新。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.12"><span style="display: none;">旧版本，不再支持：</span> 4.12            </td>            <td>2017年7月2日            </td>            <td>4.12.14            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>史上最大更新。</li>                    <li>初步支持AMD Radeon RX Vega GPU。</li>                    <li>初步支持 GeForce GTX 1000 “Pascal” 加速。</li>                    <li>支持 Gemini Lake 的颜色管理器 (Ｃolor Ｍanager)。</li>                    <li>增加对 Intel Memory Bandwidth Allocation 的支持。</li>                    <li>新增 USB Type-C 控制器接口驱动和管理员。</li>                    <li>增加支持 Rivet Networks Killer 1535。</li>                    <li>哈希函数支持。</li>                    <li>IPv6 增加支持 NETDEV_RESEND_IGMP event。</li>                    <li>对EXT4 支持 GETFSMAP ioctl。</li>                    <li>新 BFQ I/O 调度器。</li>                    <li>新 Kyber I/O 调度器。</li>                    <li>支持&gt;Raspberry Pi 的 Broadcom BCM2835 温度驱动。                    </li>                    <li>存储器管理优化。</li>                    <li>加入 TEE (Trusted Execution Environment) 子系统。</li>                    <li>SELinux 增加 security hook for prlimit。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.13"><span style="display: none;">旧版本，不再支持：</span> 4.13            </td>            <td>2017年9月3日            </td>            <td>4.13.16            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>初步支持 Intel Cannon Lake/Coffee Lake CPU。</li>                    <li>Nouveau 的开源 NVIDIA 具有 HDMI 3D/stereoscopic 支持。</li>                    <li>现在还有一个用于统一 UUID/GUID 处理的更多内核代码的 UUID 子系统。</li>                    <li>支持 WMI（Windows Management Instrumentation）总线。</li>                    <li>EXT4 现在支持超大型目录功能，支持到20亿个目录。</li>                    <li>XFS 现在支持 SEEK_HOLE 和 SEEK_DATA。</li>                    <li>NVMe 设备现在写入性能更好。</li>                    <li>新 HID 硬件支持。</li>                    <li>Thunderbolt 改进。</li>                    <li>新音效芯片支持，包含 Realtek ALC215/ALC285/ALC289。</li>                </ul>            </td>        </tr>        <tr>            <td class="templateVersion co" style="background-color: #FEF8C6;" title="旧版本，仍被支持" data-sort-value="4.14">                <span style="display: none;"> 旧版本，仍被支持：</span> 4.14            </td>            <td>2017年11月12日            </td>            <td>4.14.91            </td>            <td>葛雷格·克罗哈曼            </td>            <td>长期支持版本，从2017年11月至2020年1月            </td>            <td>                <ul>                    <li>2017/09/20 确认为长期支持版本。 </li>                    <li>支持最大 4,000TB 和 1,280,000TB 存储器。</li>                    <li>支持 AMD 加密的协处理器（CCP）。</li>                    <li>高通 MSM8916 SoC 耳机插孔检测，Allwinner H3 和 Cirrus Logic CS43130 的支持，Intel Kabylake 系统上对 RT5663、Realtek                        RT274、TI TLV320AIC32x6 和 Wolfson WM8523 的支持。</li>                    <li>支持 Wacom Driver 和 ASUS T100 Touchpad。</li>                    <li>增加 Retaltek RTL8822 驱动。</li>                    <li>支持 Intel 缓存质量监控（CQM）。</li>                    <li>ARM64 支持 VMAP_STACK。</li>                    <li>为 Btrfs 和 SquashFS 文件系统加入 zstd 压缩功能。</li>                    <li>支持 HDMI CEC（Raspberry Pi）。</li>                    <li>改善对 Ryzen CPU 的支持。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.15"><span style="display: none;">旧版本，不再支持：</span> 4.15            </td>            <td>2018年01月28日            </td>            <td>4.15.18            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>修补 Meltdown 和 Spectre 安全漏洞。</li>                    <li>支持 RISC-V 架构。</li>                    <li>支持 AMD 安全加密虚拟化。                    </li>                    <li>支持 Display Port 声音。</li>                    <li>支持 AMD Zen CPU 温度检测。</li>                    <li>增进 Intel Coffee Lake 内置显示的稳定性。</li>                    <li>新增 AMD Radeon GPU 和 AMD GPU 开源驱动模式设置。                    </li>                    <li>AMD Secure                        Encrypted Virtualization (SEV) 内核代码合并。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.16"><span style="display: none;">旧版本，不再支持：</span> 4.16            </td>            <td>2018年04月1日            </td>            <td>4.16.18            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>完善 Meltdown 和 Spectre 安全漏洞更新。</li>                    <li>增进 RISC-V 支持。</li>                    <li>支持 KVM 对 AMD 安全加密虚拟化。</li>                    <li>移除未使用的代码。</li>                    <li>各种系统结构、驱动程序、网络等改进跟修复。</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.17"><span style="display: none;">旧版本，不再支持：</span> 4.17            </td>            <td>2018年4月1日            </td><br>        <td>4.17.19            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>改进 CPU 调度器的负载估算</li>                    <li>raw BPF 跟踪点</li>                    <li>XF 文件系统支持 lazytime</li>                    <li>内核 TLS 协议完全支持</li>                    <li>histograms 触发器</li>                    <li>修补最新 Spectre 漏洞变种</li>                    <li>移除八种基本没人再使用的过时处理器架构</li>                    <li>支持 AMDGPU WattMan</li>                    <li>支持 Intel HDCP</li>                    <li>支持 Vega 12 GPU 和 NVIDIA Xavier SoC</li>                    <li>默认启用 AMDGPU DC</li>                    <li>改进电源管理，等等</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.18"><span style="display: none;">旧版本，不再支持：</span> 4.18            </td>            <td>2018年6月3日            </td>            <td>4.18.20            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL            </td>            <td>                <ul>                    <li>Unprivileged file system mounts：非特权用户现在也能挂载 FUSE 文件系统</li>                    <li>用于异步 I/O 的新内核轮询接口</li>                    <li>Restartable sequences</li>                    <li>新的 TCP zero-copy receive API</li>                    <li>用于高性能网络的 AF_XDP 机制</li>                    <li>支持 Qualcomm Snapdragon 845</li>                    <li class="mw-empty-elt"></li>                </ul>            </td>        </tr>        <tr>            <td class="templateVersion co" style="background-color: #FEF8C6;" title="旧版本，仍被支持" data-sort-value="4.19">                <span style="display: none;"> 旧版本，仍被支持：</span> 4.19            </td>            <td>2018年10月22日            </td>            <td>4.19.13            </td>            <td>葛雷格·克罗哈曼            </td>            <td>长期支持版本，从2018年10月至2020年12月            </td>            <td>                <ul>                    <li>基于异步 I/O 的轮询接口</li>                    <li>L1TF 漏洞补丁</li>                    <li>块 I/O 延迟控制器</li>                    <li>Common Applications Kept Enhanced (CAKE)队列管理算法</li>                    <li>Wi-Fi 6 (802.11ax) 初步支持</li>                    <li>实验性文件系统 EROFS</li>                    <li>Intel Cache Pseudo-locking</li>                    <li>基于时间的包传输</li>                    <li>改进 RISC-V 架构处理器的支持</li>                </ul>            </td>        </tr>        <tr>            <td style="background-color: #FDB3AB;" title="旧版本，不再支持" data-sort-value="4.20"><span style="display: none;">旧版本，不再支持：</span> 4.20            </td>            <td>2018年12月23日            </td>            <td>4.20.2            </td>            <td>葛雷格·克罗哈曼            </td>            <td>EOL版本，从2018年12月至2019年3月            </td>            <td>                <ul>                    <li>BPF 网络流解析器</li>                    <li>taprio 流量调度器</li>                    <li>PCI 层中的点对点 DMA 支持</li>                    <li>支持 C-SKY 架构</li>                    <li>pressure-stall 检测机制</li>                    <li>XArray 数据结构</li>                </ul>            </td>        </tr>        <tr>            <td colspan="6"><small>                    <div class="templateVersion l" style="margin-left: -1em;">                        <div style="float: left; margin-left: 1em;"><span style="white-space: nowrap;"><b>格式：</b></span>                        </div>                        <div style="float: left; margin-left: 1em;"><span style="border-left: 1.2em solid #FDB3AB; padding-left: 0.3em; white-space: nowrap;" title="旧版本，不再支持">旧版本</span></div>                        <div style="float: left; margin-left: 1em;"><span style="border-left: 1.2em solid #FEF8C6; padding-left: 0.3em; white-space: nowrap;" title="旧版本，仍被支持">旧版本，仍被支持</span></div>                        <div style="float: left; margin-left: 1em;"><span style="border-left: 1.2em solid #D4F4B4; padding-left: 0.3em; white-space: nowrap;" title="当前版本"><b>当前版本</b></span></div>                        <div style="float: left; margin-left: 1em;"><span style="border-left: 1.2em solid #FED1A0; padding-left: 0.3em; white-space: nowrap;" title="最新的预览版">最新的预览版</span></div>                        <div style="float: left; margin-left: 1em; display: none;"><span style="border-left: 1.2em solid #C1E6F5; padding-left: 0.3em; white-space: nowrap;" title="未来版本">未来版本</span></div>                        <div style="clear: left;"></div>                    </div>                </small>            </td>        </tr>    </table></table>
+
+
+<p>5.x.y版本系列</p>
+<p><table class="wikitable mw-collapsible mw-collapsed">    <table>        <tr>            <th>版本            </th>            <th>最初发行日期            </th>            <th>当前版本            </th>            <th>维护者            </th>            <th>支持状态            </th>            <th>备注            </th>        </tr>        <tr>            <td class="templateVersion co" style="background-color: #FEF8C6;" title="旧版本，仍被支持" data-sort-value="5.0">                <span style="display: none;"> 旧版本，仍被支持：</span> 5.0            </td>            <td>2019年03月03日            </td>            <td>5.0.17            </td>            <td>            </td>            <td>支持的发行            </td>            <td>            </td>        </tr>        <tr>            <td class="templateVersion c" style="background-color: #D4F4B4;" title="当前版本" data-sort-value="5.1"><span style="display: none;"> 当前版本：</span> <b>5.1</b>            </td>            <td>2019年05月05日            </td>            <td>5.1.3            </td>            <td>Greg Kroah-Hartman            </td>            <td>最新稳定发行            </td>            <td>            </td>        </tr>        <tr>            <td class="templateVersion cp" style="background-color: #FED1A0;" title="最新预览版本" data-sort-value="5.2"><span style="display: none;"> 最新预览版本：</span> 5.2            </td>            <td>2019年05月19日            </td>            <td>5.2-rc1            </td>            <td>Linus Torvalds            </td>            <td>最新不稳定发行            </td>            <td>            </td>        </tr>        <tr></tr></table></table></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/18/超物Linux-2/" rel="next" title="超物Linux-2">
+                <i class="fa fa-chevron-left"></i> 超物Linux-2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/20/超物Linux-3/" rel="prev" title="超物Linux-3">
+                超物Linux-3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Lao Lin</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+    <div id="sidebar-dimmer"></div>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lao Lin</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '22772f2b4a768f474172',
+    clientSecret: 'ed8cf74d18d2d50a38a3475dcebebc8cd5c276c8',
+    repo: 'eternaltimes.github.io',
+    owner: 'EternalTimes',
+    admin: ['EternalTimes'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
